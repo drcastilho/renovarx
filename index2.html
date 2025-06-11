@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>RenovaRx - Renovação de Receitas Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #42ab6b;
+      --secondary: #e7f9ef;
+      --accent: #3d8af7;
+      --gray: #f5f7fa;
+      --text: #1a2d23;
+      --radius: 1.3rem;
+      --shadow: 0 3px 14px rgba(34,44,56,0.10);
+      --dark: #0e3620;
+    }
+    html { scroll-behavior: smooth;}
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      background: var(--gray);
+      color: var(--text);
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 0 1.1rem;
+    }
+    /* Hero */
+    .hero {
+      background: linear-gradient(120deg,#e7f9ef 80%, #f3f8fa 100%);
+      padding: 2.7rem 0 2rem 0;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 1.1s;
+    }
+    .hero-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+      letter-spacing:0.01em;
+    }
+    .hero-sub {
+      font-size: 1.13rem;
+      margin-bottom: 1.3rem;
+      color: var(--dark);
+    }
+    .cta-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 2rem;
+      padding: 1rem 2.1rem;
+      font-size: 1.11rem;
+      font-weight: bold;
+      margin: 1.1rem 0 0 0;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(66,171,107,0.09);
+      text-decoration: none;
+      transition: background 0.18s, transform 0.18s;
+      display: inline-block;
+    }
+    .cta-btn:hover {
+      background: var(--accent);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .conformidade-hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .conformidade-hero img {
+      height: 34px;
+      border-radius: 7px;
+      background: #fff;
+      box-shadow: 0 2px 8px #e1e1e1;
+      padding:2px 7px;
+    }
+    .conformidade-hero span {
+      font-size: 1rem;
+      color: #51735b;
+      font-weight: 500;
+      letter-spacing:0.01em;
+    }
+    /* Benefícios */
+    .beneficios {
+      display: flex;
+      gap: 1.3rem;
+      margin: 2.5rem auto 1.8rem auto;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1.2s;
+    }
+    .beneficio-card {
+      flex: 1 1 170px;
+      min-width: 150px;
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 1.1rem 1rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: transform 0.17s, box-shadow 0.17s;
+      cursor: pointer;
+      margin-bottom:0.6rem;
+    }
+    .beneficio-card:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(66,171,107,0.12);
+      background: var(--secondary);
+    }
+    .beneficio-icone {
+      font-size: 2.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .beneficio-titulo {
+      font-size: 1.09rem;
+      font-weight: bold;
+      margin-bottom: 0.23rem;
+      color: var(--primary);
+    }
+    .beneficio-desc {
+      font-size: 0.99rem;
+      color: #445e53;
+    }
+    /* Serviço/Preço */
+    .servico-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2.1rem 1.3rem;
+      text-align: center;
+      margin: 2.7rem auto 2rem auto;
+      max-width: 420px;
+      animation: fadeInUp 1.2s;
+    }
+    .servico-preco {
+      font-size: 2rem;
+      color: var(--primary);
+      font-weight: bold;
+      margin-bottom: 0.4rem;
+    }
+    .servico-info {
+      font-size: 1.1rem;
+      color: #2c4439;
+      margin-bottom: 1rem;
+    }
+    .servico-selo {
+      display: inline-flex;
+      align-items: center;
+      background: var(--secondary);
+      border-radius: 1.2rem;
+      padding: 0.35rem 1rem;
+      font-size: 0.97rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 1.3rem;
+      gap: 0.5rem;
+    }
+    .servico-selo img { height: 20px; }
+    /* Carrossel Depoimentos */
+    .depoimentos-box {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 1.2rem 1.3rem 1.2rem;
+      margin: 2.7rem auto 1.7rem auto;
+      max-width: 460px;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 1.2s;
+    }
+    .depoimentos-media {
+      color: #f0b900;
+      font-size: 1.22rem;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+      letter-spacing:0.01em;
+    }
+    .depoimento {
+      font-size: 1.08rem;
+      color: #27563c;
+      font-style: italic;
+      min-height: 60px;
+      transition: opacity 0.4s;
+    }
+    .depoimentos-nav {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+    .depoimento-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #d3eedd;
+      cursor: pointer;
+      transition: background 0.18s;
+      border: 0;
+    }
+    .depoimento-dot.active, .depoimento-dot:hover {
+      background: var(--primary);
+    }
+    /* FAQ Accordion */
+    .faq-box {
+      max-width: 480px;
+      margin: 2.6rem auto 2.2rem auto;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      animation: fadeInUp 1.2s;
+    }
+    .faq-title {
+      font-size: 1.22rem;
+      color: var(--primary);
+      font-weight: bold;
+      text-align: center;
+      padding: 1.1rem 0 0.4rem 0;
+    }
+    .faq-list {
+      margin: 0;
+      padding: 0 1.1rem 1.2rem 1.1rem;
+    }
+    .faq-item {
+      border-bottom: 1px solid #e9f7f0;
+    }
+    .faq-q {
+      cursor: pointer;
+      padding: 0.93rem 0 0.5rem 0.2rem;
+      font-weight: bold;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: color 0.17s;
+      font-size: 1.05rem;
+    }
+    .faq-q:hover { color: var(--primary);}
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.33s cubic-bezier(.4,0,.2,1), opacity 0.23s;
+      opacity: 0;
+      font-size: 0.98rem;
+      color: #2c4439;
+      padding-left: 1.1rem;
+    }
+    .faq-item.active .faq-a {
+      max-height: 180px;
+      opacity: 1;
+      padding-bottom: 0.7rem;
+    }
+    /* Seção de Conformidade */
+    .conformidade-section {
+      background: #fff;
+      border-top: 1px solid #e4e4e4;
+      padding: 2rem 0 1rem 0;
+      margin-top:2.5rem;
+      text-align:center;
+      animation: fadeInUp 1.3s;
+    }
+    .conformidade-logos {
+      display: flex;
+      justify-content: center;
+      gap: 2.3rem;
+      flex-wrap:wrap;
+      max-width: 720px;
+      margin: 0 auto 0.9rem auto;
+    }
+    .conformidade-logos div {
+      text-align:center;
+    }
+    .conformidade-logos img {
+      height: 46px;
+      margin-bottom: 0.5rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #e9e9e9;
+      padding:4px 8px;
+      object-fit:contain;
+    }
+    .conformidade-logos span {
+      font-size:0.98rem;
+      color:#388d61;
+      display:block;
+    }
+    .conformidade-desc {
+      color:#767676;
+      font-size:0.99rem;
+      margin-top:1.1rem;
+    }
+    /* Rodapé */
+    footer {
+      background: #f7faf9;
+      color: #7a7a7a;
+      text-align: center;
+      font-size: 0.97rem;
+      padding: 1.5rem 0 1.1rem 0;
+      margin-top:2rem;
+      border-top: 1px solid #e4e4e4;
+    }
+    .footer-links a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 0.5rem;
+      font-weight:500;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--accent);}
+    /* WhatsApp Floating */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #25D366;
+      color: #fff;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      box-shadow: 0 3px 14px rgba(34,44,56,0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      z-index: 999;
+      transition: background 0.2s, transform 0.15s;
+      animation: whatsPulse 1.5s infinite;
+    }
+    .whatsapp-float:hover {
+      background: #128C7E;
+      transform: scale(1.08);
+    }
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(24px);}
+      to { opacity: 1; transform: none;}
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(36px);}
+      to { opacity: 1; transform: none;}
+    }
+    @keyframes whatsPulse {
+      0%, 100% { box-shadow: 0 3px 14px rgba(34,44,56,0.13);}
+      50% { box-shadow: 0 0 28px #25D36688;}
+    }
+    /* Responsive */
+    @media (max-width:700px){
+      .container, .faq-box, .depoimentos-box, .servico-card { max-width:98vw;}
+      .beneficios { flex-direction: column; gap:1rem;}
+      .conformidade-logos { gap:1.1rem;}
+      .conformidade-logos img { height:38px;}
+      .hero-title { font-size: 1.48rem;}
+    }
+    @media (max-width:520px){
+      .whatsapp-float { right: 12px; bottom: 12px;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-title">Renove sua receita médica online</div>
+      <div class="hero-sub">Praticidade, segurança e validade legal em todo o Brasil.<br>Processo 100% digital, com receita emitida por médico registrado.</div>
+      <a href="https://wa.me/5561992686892?text=Quero+renovar+minha+receita" class="cta-btn">Renovar Agora</a>
+      <div class="conformidade-hero">
+        <img src="https://epep.cfm.org.br/javax.faces.resource/imagens/logo_epp_login.png.seam?ln=styleSkinInfox/default" alt="CFM">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Logotipo_da_Anvisa.jpg" alt="ANVISA">
+        <span>Conformidade garantida</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefícios -->
+  <section class="container">
+    <div class="beneficios">
+      <div class="beneficio-card">
+        <div class="beneficio-icone">💻</div>
+        <div class="beneficio-titulo">100% Online</div>
+        <div class="beneficio-desc">Receba sua receita sem sair de casa, via WhatsApp ou e-mail.</div>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icone">🔒</div>
+        <div class="beneficio-titulo">Segurança Digital</div>
+        <div class="beneficio-desc">Assinatura digital certificada conforme a lei e sigilo médico garantido.</div>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icone">⚕️</div>
+        <div class="beneficio-titulo">Validade Nacional</div>
+        <div class="beneficio-desc">Receitas aceitas em todo o Brasil, conforme Resolução CFM 2.299/21.</div>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icone">⏱️</div>
+        <div class="beneficio-titulo">Agilidade</div>
+        <div class="beneficio-desc">Receba sua receita em poucas horas, sem burocracia.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Serviço/Preço -->
+  <section class="servico-card">
+    <div class="servico-preco">R$ 59,90</div>
+    <div class="servico-info">Renovação de receita médica digital.<br>Fácil, rápido e seguro.</div>
+    <div class="servico-selo">
+      <img src="https://epep.cfm.org.br/javax.faces.resource/imagens/logo_epp_login.png.seam?ln=styleSkinInfox/default" alt="CFM" style="height:18px;">
+      CFM/ANVISA/Assinatura Digital
+    </div>
+    <a href="https://wa.me/5561992686892?text=Quero+renovar+minha+receita" class="cta-btn">Solicitar Agora</a>
+  </section>
+
+  <!-- Depoimentos (Carrossel) -->
+  <section class="depoimentos-box">
+    <div class="depoimentos-media">4.9 ★★★★★ <span style="color:#888; font-size:0.97rem;">(234 avaliações)</span></div>
+    <div class="depoimento" id="depoimento-text">
+      "Serviço muito prático, resolveu minha necessidade em minutos!"
+    </div>
+    <div class="depoimentos-nav" id="depoimentos-nav"></div>
+  </section>
+
+  <!-- FAQ (Accordion) -->
+  <section class="faq-box">
+    <div class="faq-title">Perguntas Frequentes</div>
+    <div class="faq-list" id="faq-list">
+      <!-- Items serão inseridos via JS -->
+    </div>
+  </section>
+
+  <!-- Seção de Conformidade -->
+  <section class="conformidade-section">
+    <div class="conformidade-logos">
+      <div>
+        <img src="https://epep.cfm.org.br/javax.faces.resource/imagens/logo_epp_login.png.seam?ln=styleSkinInfox/default" alt="CFM">
+        <span>CFM</span>
+      </div>
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Logotipo_da_Anvisa.jpg" alt="ANVISA">
+        <span>ANVISA</span>
+      </div>
+      <div>
+        <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="LGPD">
+        <span>LGPD</span>
+      </div>
+      <div>
+        <img src="https://cdn-icons-png.flaticon.com/512/545/545684.png" alt="Receita Digital">
+        <span>Receita Digital</span>
+      </div>
+      <div>
+        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Certificação Digital">
+        <span>Certificação Digital</span>
+      </div>
+    </div>
+    <div class="conformidade-desc">
+      Receita digital emitida por médico habilitado (CRM ativo).<br>
+      Em conformidade com normas do CFM, ANVISA, LGPD e assinatura digital certificada.
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <div style="margin-bottom:0.5rem;">
+      <strong>RenovaRx</strong> &copy; 2024<br>
+      CNPJ: 00.000.000/0001-00
+    </div>
+    <div class="footer-links">
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Termos de Uso</a>
+      <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+    </div>
+    <div style="font-size:0.95rem; margin-top:0.6rem;">
+      Este site não substitui a consulta médica presencial em casos de emergência.  
+    </div>
+  </footer>
+
+  <!-- Botão WhatsApp Flutuante -->
+  <a href="https://wa.me/5561992686892?text=Olá,+quero+renovar+minha+receita" class="whatsapp-float" title="Fale no WhatsApp" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="#fff"><path d="M20.52 3.48A12 12 0 003.48 20.52l-1.43 5.25a1 1 0 001.24 1.24l5.25-1.43A12 12 0 0020.52 3.48zm-2.18 13.44l-1.43 1.43a9 9 0 01-7.26 2.36c-.25-.02-.49-.05-.74-.09l-.47-.08a1 1 0 01-.7-1.41l.83-1.61a8.93 8.93 0 01-1.68-4.38A9 9 0 019 4a9 9 0 018.53 12.92zm-7.34-4.39a1 1 0 011.3-1.29 5.3 5.3 0 004.42 0 1 1 0 111.11 1.62 7.3 7.3 0 01-6.62 0z"/></svg>
+  </a>
+
+  <!-- JS para carrossel e FAQ dinâmico -->
+  <script>
+    // Carrossel depoimentos
+    const depoimentos = [
+      "“Serviço muito prático, resolveu minha necessidade em minutos!”",
+      "“Atendimento ágil, seguro e com total transparência.”",
+      "“Recebi a receita pelo WhatsApp de forma super rápida!”",
+      "“Equipe muito atenciosa, me senti seguro durante todo o processo.”",
+      "“Recomendo para quem precisa renovar sem burocracia.”"
+    ];
+    let depoimentoAtual = 0;
+    const depoimentoText = document.getElementById("depoimento-text");
+    const depoimentosNav = document.getElementById("depoimentos-nav");
+    function mostrarDepoimento(idx) {
+      depoimentoText.style.opacity = 0;
+      setTimeout(() => {
+        depoimentoText.textContent = depoimentos[idx];
+        depoimentoText.style.opacity = 1;
+      }, 300);
+      Array.from(depoimentosNav.children).forEach((dot,i) => {
+        dot.classList.toggle('active', i === idx);
+      });
+    }
+    depoimentos.forEach((_,i) => {
+      const dot = document.createElement('button');
+      dot.className = 'depoimento-dot'+(i===0?' active':'');
+      dot.onclick = ()=>{ depoimentoAtual = i; mostrarDepoimento(i);}
+      depoimentosNav.appendChild(dot);
+    });
+    setInterval(()=>{ 
+      depoimentoAtual = (depoimentoAtual+1)%depoimentos.length; 
+      mostrarDepoimento(depoimentoAtual); 
+    }, 6000);
+
+    // FAQ accordion
+    const faqPerguntas = [
+      {
+        q: "Como funciona a renovação de receita?",
+        a: "O processo é totalmente online: você solicita, um médico avalia seus dados e emite a receita digitalmente, com assinatura eletrônica válida."
+      },
+      {
+        q: "A receita digital tem validade legal?",
+        a: "Sim! Em conformidade com a Resolução CFM 2.299/21 e normas da ANVISA. A receita digital é aceita em todo o Brasil."
+      },
+      {
+        q: "Quais medicamentos posso renovar?",
+        a: "Receitas de uso contínuo permitidas por lei, exceto medicações controladas que exijam avaliação presencial obrigatória."
+      },
+      {
+        q: "Em quanto tempo recebo minha receita?",
+        a: "Na maioria dos casos, em até 24 horas úteis após o envio dos dados. Receitas enviadas direto no seu WhatsApp ou e-mail."
+      },
+      {
+        q: "Meus dados estão seguros?",
+        a: "Sim. Todo o processo segue as normas da LGPD, com sigilo médico e proteção criptografada das informações."
+      }
+    ];
+    const faqList = document.getElementById('faq-list');
+    faqPerguntas.forEach((item,i) => {
+      const faqItem = document.createElement('div');
+      faqItem.className = 'faq-item';
+      faqItem.innerHTML = `
+        <div class="faq-q">${item.q}<span>${i===0?'-':'+'}</span></div>
+        <div class="faq-a">${item.a}</div>
+      `;
+      if(i===0) faqItem.classList.add('active');
+      faqList.appendChild(faqItem);
+    });
+    faqList.addEventListener('click', e=>{
+      const item = e.target.closest('.faq-item');
+      if(!item) return;
+      document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('active'));
+      item.classList.add('active');
+      // atualiza +/-
+      document.querySelectorAll('.faq-q span').forEach((s,idx)=>{
+        s.textContent = document.querySelectorAll('.faq-item')[idx].classList.contains('active') ? '-' : '+';
+      });
+    });
+  </script>
+</body>
+</html>
